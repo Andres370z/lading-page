@@ -9,10 +9,10 @@ import Swiper from 'swiper';
 export class AppComponent implements OnInit {
   title = 'loading-page';
   public myAngularxQrCode: any;
-  public qrCodeDownloadLink: SafeUrl = "https://atlanticrebrokers.com/"
+  public qrCodeDownloadLink: SafeUrl = "https://business-card-alejandro-fuentes.netlify.app/"
   constructor() {
     // assign a value
-    this.myAngularxQrCode = 'https://atlanticrebrokers.com/';
+    this.myAngularxQrCode = 'https://business-card-alejandro-fuentes.netlify.app/';
   }
   ngOnInit(): void {
     const mySwiper = new Swiper('.swiper-container', {
@@ -28,11 +28,7 @@ export class AppComponent implements OnInit {
     // Número de teléfono y mensaje
     const phoneNumber = '+573106993585'; 
     const message = 'Hola, ¿cómo estás, me gustaria mas información sobre tus productos?';
-
-    
     const whatsappLink = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-
-    
     window.location.href = whatsappLink;
   }
   
