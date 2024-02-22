@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { QRCodeModule } from 'angularx-qrcode';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgImageSliderModule } from 'ng-image-slider';
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    QRCodeModule,
+    HttpClientModule,
     NgImageSliderModule
   ],
   providers: [],

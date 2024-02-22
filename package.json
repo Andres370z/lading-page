@@ -18,12 +18,18 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "@sweetalert2/themes": "^5.0.16",
+    "@types/vcards-js": "^2.10.5",
     "angularx-qrcode": "^13.0.15",
+    "blob-util": "^2.0.2",
     "bootstrap": "^5.3.2",
     "ng-image-slider": "^5.0.0",
     "rxjs": "~7.5.0",
+    "sweetalert2": "^11.10.5",
     "swiper": "^11.0.5",
     "tslib": "^2.3.0",
+    "vcard-creator": "^0.6.0",
+    "vcards-js": "^2.10.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
