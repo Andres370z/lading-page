@@ -3,7 +3,7 @@ import { SafeUrl } from '@angular/platform-browser';
 import Swiper from 'swiper';
 import { base64StringToBlob } from 'blob-util';
 import VCard from 'vcard-creator'
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AlertService } from '../services/alert.service';
 import { AuthService } from '../services/general/auth.service';
 
@@ -16,13 +16,14 @@ export class HomeComponent implements OnInit {
 
   title = 'loading-page';
   fileName = '';
-  public customerDetail:any;
+  public customerDetail: any;
   public myAngularxQrCode: any;
   public qrCodeDownloadLink: SafeUrl = "https://card.systemresolution.com/home/"
   constructor(
     private activatedRoute: ActivatedRoute,
-    private _https:AuthService,
+    private _https: AuthService,
     private alert: AlertService,
+    private router: Router
   ) {
     this.activatedRoute.paramMap.subscribe((parametros: ParamMap) => {
       let token = parametros.get("id");
@@ -44,30 +45,25 @@ export class HomeComponent implements OnInit {
   onChangeURL(url: SafeUrl) {
     this.qrCodeDownloadLink = url;
   }
-  enviarWhatsapp(): void {
-    // Número de teléfono y mensaje
-    const phoneNumber = '+573106993585'; 
-    const message = 'Hola, ¿cómo estás, me gustaria mas información sobre tus productos?';
-    const whatsappLink = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-    window.location.href = whatsappLink;
-  }
+  
   private vCardCreator(item: any) {
     console.log(item)
-    this.fileName = item.name+'.vcf'
+    this.fileName = item.name + '.vcf'
     const vCard = new VCard();
     vCard
-    // Add personal data
-    .addName(item.name, item.lastName)
-    // Add work data
-    .addCompany('Atlantic Rebrokers')
-    .addJobtitle(item.name+' '+item.jobTitle)
-    .addRole(item.jobTitle)
-    .addEmail(item.email)
-    .addPhoneNumber(item.telephone, 'WORK')
-    .addAddress( item.shippingAddress)
-    .addURL('https://atlanticrebrokers.com/')
+      // Add personal data
+      .addName(item.name, item.lastName)
+      // Add work data
+      .addCompany('Atlantic Rebrokers')
+      .addJobtitle(item.name + ' ' + item.jobTitle)
+      .addRole(item.jobTitle)
+      .addEmail(item.email)
+      .addPhoneNumber(item.telephone, 'WORK')
+      .addAddress(item.shippingAddress)
+      .addURL('https://atlanticrebrokers.com/')
     return vCard.toString()
   }
+
 
   private blobable(item: any): Blob {
     const contentType = 'application/pgp-keys';
@@ -83,15 +79,35 @@ export class HomeComponent implements OnInit {
     a.click();
     document.body.removeChild(a);
   }
-  getCustomerDetail(item: string){
+  getCustomerDetail(item: string) {
     this.alert.loading();
-    this._https.getUsers(item).then((resulta: any)=>{
-          this.customerDetail = resulta
-          this.myAngularxQrCode = 'https://card.systemresolution.com/home/'+btoa(this.customerDetail.id);
-          this.alert.messagefin();
-    }).catch((err: any)=>{
+    this._https.getUsers(item).then((resulta: any) => {
+      this.customerDetail = resulta
+      this.myAngularxQrCode = 'https://card.systemresolution.com/home/' + btoa(this.customerDetail.id);
+      this.alert.messagefin();
+    }).catch((err: any) => {
       console.log(err)
       this.alert.error("Error", "Usuario no existe");
     });
-}
+  }
+
+  sendMail(){
+    console.log('trabajando')
+    const email = this.customerDetail.email
+    window.location.href = `mailto:${email}`
+    
+  }
+  sendWhatsApp(){
+    const phone =  this.customerDetail.telephone
+    const message= `Buen%20día,%20${this.customerDetail.name}%20estoy%20interesado%20en...`
+    const urlFin = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`
+    window.location.href = urlFin
+    
+  }
+  sendWhatsAppFrie(){
+    const url =  'https://business-card-alejandro-fuentes.netlify.app/'
+    const urlFin = `https://api.whatsapp.com/send?&text=${url}`
+    window.location.href = urlFin
+  }
+  
 }
