@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   fileName = '';
   public customerDetail:any;
   public myAngularxQrCode: any;
-  public qrCodeDownloadLink: SafeUrl = "https://business-card-alejandro-fuentes.netlify.app/"
+  public qrCodeDownloadLink: SafeUrl = "https://card.systemresolution.com/home/"
   constructor(
     private activatedRoute: ActivatedRoute,
     private _https:AuthService,
@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
         this.getCustomerDetail(token)
       }
     })
-    this.myAngularxQrCode = 'https://business-card-alejandro-fuentes.netlify.app/';
   }
   ngOnInit(): void {
     const mySwiper = new Swiper('.swiper-container', {
@@ -88,6 +87,7 @@ export class HomeComponent implements OnInit {
     this.alert.loading();
     this._https.getUsers(item).then((resulta: any)=>{
           this.customerDetail = resulta
+          this.myAngularxQrCode = 'https://card.systemresolution.com/home/'+btoa(this.customerDetail.id);
           this.alert.messagefin();
     }).catch((err: any)=>{
       console.log(err)
