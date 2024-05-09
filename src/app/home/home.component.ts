@@ -105,7 +105,7 @@ export class HomeComponent implements OnInit {
     
   }
   sendWhatsAppFrie(){
-    const url =  'https://business-card-alejandro-fuentes.netlify.app/'
+    const url =  'https://card.systemresolution.com/'
     const urlFin = `https://api.whatsapp.com/send?&text=${url}`
     window.location.href = urlFin
   }
