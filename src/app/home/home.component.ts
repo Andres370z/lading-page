@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
 
   title = 'loading-page';
   fileName = '';
+  //public tele: any = '(+57) 3166818767'
+  public customerUrl: any;
   public customerDetail: any;
   public myAngularxQrCode: any;
   public qrCodeDownloadLink: SafeUrl = "https://card.systemresolution.com/home/"
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit {
       let token = parametros.get("id");
       if (token != null) {
         this.getCustomerDetail(token)
+        console.log(token, 'este es token')
       } else {
         token = "1";
         this.getCustomerDetail(token)
@@ -84,7 +87,9 @@ export class HomeComponent implements OnInit {
     this._https.getUsers(item).then((resulta: any) => {
       this.customerDetail = resulta
       this.myAngularxQrCode = 'https://card.systemresolution.com/home/' + btoa(this.customerDetail.id);
+      this.customerUrl = 'https://card.systemresolution.com/home/' + item;
       this.alert.messagefin();
+      console.log('one ', this.customerDetail)
     }).catch((err: any) => {
       console.log(err)
       this.alert.error("Error", "Usuario no existe");
@@ -99,9 +104,10 @@ export class HomeComponent implements OnInit {
   }
   sendWhatsApp(){
     const phone =  this.customerDetail.telephone
+    //console.log('este es tu telefono, ',  this.customerDetail.telephone)
     const message= `Buen%20día,%20${this.customerDetail.name}%20estoy%20interesado%20en...`
     const urlFin = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`
-    window.location.href = urlFin
+   window.location.href = urlFin
     
   }
   sendWhatsAppFrie(){
