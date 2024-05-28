@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   title = 'loading-page';
   fileName = '';
-  //public tele: any = '(+57) 3166818767'
+  public view: boolean = false
   public customerUrl: any;
   public customerDetail: any;
   public myAngularxQrCode: any;
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
     private alert: AlertService,
     private router: Router
   ) {
+
     this.activatedRoute.paramMap.subscribe((parametros: ParamMap) => {
       let token = parametros.get("id");
       if (token != null) {
@@ -109,54 +110,64 @@ export class HomeComponent implements OnInit {
   sendWhatsApp() {
     const phone = this.customerDetail.telephone;
     const message = `Buen%20día,%20${this.customerDetail.name}%20estoy%20interesado%20en...`;
-    const imageUrl = 'https://cdn.pixabay.com/photo/2024/05/18/15/41/teeth-8770514_1280.jpg' // URL de la imagen
-    const urlFin = `https://api.whatsapp.com/send?phone=${phone}&text=${message}%20${encodeURIComponent(imageUrl)}`;
+    const urlFin = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`;
     window.location.href = urlFin;
   }
 
-  sendWhatsAppFrie() {
-    const url = 'https://card.systemresolution.com/'
-    const urlFin = `https://api.whatsapp.com/send?&text=${url}`
-    window.location.href = urlFin
-  }
 
 
   dowloadImg() {
-    // html2canvas(this.screen.nativeElement).then(canvas => {
-    //   canvas.toBlob(async blob => {
-    //     const file = new File([blob], 'card-atlantic.png', { type: 'image/png' });
+    this.alert.loading()
+    this.showCard();
+    html2canvas(this.screen.nativeElement).then(canvas => {
+      canvas.toBlob(async blob => {
+        if (!blob) {
+          console.error('Se daño');
+          return;
+        }
+        // convertir a un blob
+        const file = new File([blob], 'card-atlantic.png', { type: 'image/png' });
 
-    //     if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    //       try {
-    //         await navigator.share({
-    //           title: 'Check this out!',
-    //           text: 'Here is a QR code for you.',
-    //           files: [file]
-    //         });
-    //         console.log('Sharing successful');
-    //       } catch (error) {
-    //         console.error('Sharing failed', error);
-    //       }
-    //     } else {
-    //       console.error('Your system doesn\'t support sharing files.');
-    //     }
-    //   });
-    // });
+        // si no soporta el navegador
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              title: `Hola soy ${this.customerDetail.name}`,
+              text: 'Codigo qr',
+              files: [file]
+            });
+            console.log('Ok');
+          } catch (error) {
+            console.error('se dañó otra vez', error);
+          }
+        } else {
+          console.error('El navegador no soporta');
+          this.downloadFile(file);
 
-    const navigator = window.navigator as any;
+        }
+      }, 'image/png');
 
-    if (navigator.share) {
-      navigator
-        .share({
-          title: 'Google',
-          text: 'Save',
-          url: 'https://google.com'
-        })
-        .then(() => console.log('Successful share'))
-        .catch(error => console.log('Error sharing', error));
-    } else {
-      alert('share not supported');
-    }
+
+    });
+    this.hideCard()
+    this.alert.messagefin()
 
   }
+  downloadFile(file: File) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  // Método para mostrar la tarjeta
+showCard() {
+  this.screen.nativeElement.style.display = 'block';
+}
+
+// Método para ocultar la tarjeta
+hideCard() {
+  this.screen.nativeElement.style.display = 'none';
+}
 }

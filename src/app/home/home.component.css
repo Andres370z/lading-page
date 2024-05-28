@@ -38,7 +38,9 @@ h1 {
 .mobile-image {
     display: none;
 }
-
+.noneElement {
+    display: none;
+}
 
 /* Muestra la imagen para dispositivos móviles cuando la pantalla sea de 600px o menos */
 
