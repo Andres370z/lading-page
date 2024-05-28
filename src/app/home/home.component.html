@@ -409,7 +409,71 @@
       </div>
     </div>
   </section>
-  
+  <!-- TARJETA QR -->
+  <section
+    class="has_ma_el_bg_slider elementor-section elementor-top-section elementor-element elementor-element-59b0026 elementor-section-stretched elementor-section-content-middle elementor-section-full_width elementor-section-height-default elementor-section-height-default jltma-glass-effect-no"
+    data-id="59b0026" data-element_type="section"
+    data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;}">
+    <div class="elementor-background-overlay"></div>
+    <div class="elementor-container elementor-column-gap-no">
+      <div
+        class="has_ma_el_bg_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7f9e1ec jltma-glass-effect-no"
+        data-id="7f9e1ec" data-element_type="column">
+        <div class="elementor-widget-wrap elementor-element-populated">
+          <div
+            class="elementor-element elementor-element-ef905b9 jltma-glass-effect-no elementor-widget elementor-widget-heading"
+            data-id="ef905b9" data-element_type="widget" data-widget_type="heading.default">
+            <div class="elementor-widget-container">
+              <h2 class="elementor-heading-title elementor-size-default">Descargar y guardar contacto en el teléfono
+              </h2>
+            </div>
+          </div>
+          <div
+            class="elementor-element elementor-element-a94e7c7 elementor-view-default jltma-glass-effect-no elementor-widget elementor-widget-icon"
+            data-id="a94e7c7" data-element_type="widget" data-widget_type="icon.default">
+            <div class="elementor-widget-container">
+              <div class="elementor-icon-wrapper">
+                <div class="elementor-icon">
+                  <i aria-hidden="true" class="fas fa-angle-double-down"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="elementor-element elementor-element-d677072 elementor-align-center jltma-glass-effect-no elementor-widget elementor-widget-button"
+            data-id="d677072" data-element_type="widget" data-widget_type="button.default">
+            <div class="elementor-widget-container">
+              <div class="elementor-button-wrapper">
+                <a class="elementor-button elementor-button-link elementor-size-md elementor-animation-float"
+                  (click)="regularBrowser()">
+                  <span class="elementor-button-content-wrapper">
+                    <span class="elementor-button-icon elementor-align-icon-left">
+                      <i aria-hidden="true" class="fas fa-cloud-download-alt"></i> </span>
+                    <span class="elementor-button-text">Guardar Contacto</span>
+                  </span>
+                </a>
+              </div>
+              <div class="blog-wrapper">
+                <div class="blog-card" id="myImage" #screen>
+                  <div class="card-img"><img src="./../assets/images/LOGO-ATLANTIC-3-removebg-preview.png"></div>
+                  <div class="card-details"><span><i class="fa-regular fa-user"></i>{{customerDetail.name}} {{customerDetail.lastName}}</span></div>
+                  <div class="card-text">
+                    <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                    <a (click)="dowloadImg()">Share</a>
+                  </div>
+                  <img #canvas style="display: none;">
+                  <a #downloadLink></a>
+                  <div class="read-more">Escanear Codigo QR</div>
+                </div>
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section
     class="has_ma_el_bg_slider elementor-section elementor-top-section elementor-element elementor-element-29f8b62 elementor-section-boxed elementor-section-height-default elementor-section-height-default jltma-glass-effect-no"

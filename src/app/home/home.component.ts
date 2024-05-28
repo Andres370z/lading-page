@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import Swiper from 'swiper';
 import { base64StringToBlob } from 'blob-util';
@@ -6,6 +6,7 @@ import VCard from 'vcard-creator'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AlertService } from '../services/alert.service';
 import { AuthService } from '../services/general/auth.service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,9 @@ export class HomeComponent implements OnInit {
   public customerDetail: any;
   public myAngularxQrCode: any;
   public qrCodeDownloadLink: SafeUrl = "https://card.systemresolution.com/home/"
+  @ViewChild('screen') screen: ElementRef;
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
   constructor(
     private activatedRoute: ActivatedRoute,
     private _https: AuthService,
@@ -48,7 +52,7 @@ export class HomeComponent implements OnInit {
   onChangeURL(url: SafeUrl) {
     this.qrCodeDownloadLink = url;
   }
-  
+
   private vCardCreator(item: any) {
     console.log(item)
     this.fileName = item.name + '.vcf'
@@ -96,24 +100,63 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  sendMail(){
+  sendMail() {
     console.log('trabajando')
     const email = this.customerDetail.email
     window.location.href = `mailto:${email}`
-    
+
   }
-  sendWhatsApp(){
-    const phone =  this.customerDetail.telephone
-    //console.log('este es tu telefono, ',  this.customerDetail.telephone)
-    const message= `Buen%20día,%20${this.customerDetail.name}%20estoy%20interesado%20en...`
-    const urlFin = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`
-   window.location.href = urlFin
-    
+  sendWhatsApp() {
+    const phone = this.customerDetail.telephone;
+    const message = `Buen%20día,%20${this.customerDetail.name}%20estoy%20interesado%20en...`;
+    const imageUrl = 'https://cdn.pixabay.com/photo/2024/05/18/15/41/teeth-8770514_1280.jpg' // URL de la imagen
+    const urlFin = `https://api.whatsapp.com/send?phone=${phone}&text=${message}%20${encodeURIComponent(imageUrl)}`;
+    window.location.href = urlFin;
   }
-  sendWhatsAppFrie(){
-    const url =  'https://card.systemresolution.com/'
+
+  sendWhatsAppFrie() {
+    const url = 'https://card.systemresolution.com/'
     const urlFin = `https://api.whatsapp.com/send?&text=${url}`
     window.location.href = urlFin
   }
-  
+
+
+  dowloadImg() {
+    // html2canvas(this.screen.nativeElement).then(canvas => {
+    //   canvas.toBlob(async blob => {
+    //     const file = new File([blob], 'card-atlantic.png', { type: 'image/png' });
+
+    //     if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    //       try {
+    //         await navigator.share({
+    //           title: 'Check this out!',
+    //           text: 'Here is a QR code for you.',
+    //           files: [file]
+    //         });
+    //         console.log('Sharing successful');
+    //       } catch (error) {
+    //         console.error('Sharing failed', error);
+    //       }
+    //     } else {
+    //       console.error('Your system doesn\'t support sharing files.');
+    //     }
+    //   });
+    // });
+
+    const navigator = window.navigator as any;
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title: 'Google',
+          text: 'Save',
+          url: 'https://google.com'
+        })
+        .then(() => console.log('Successful share'))
+        .catch(error => console.log('Error sharing', error));
+    } else {
+      alert('share not supported');
+    }
+
+  }
 }
