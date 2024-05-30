@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
+  @ViewChild('qrSection') qrSection: ElementRef;
   constructor(
     private activatedRoute: ActivatedRoute,
     private _https: AuthService,
@@ -53,7 +54,9 @@ export class HomeComponent implements OnInit {
   onChangeURL(url: SafeUrl) {
     this.qrCodeDownloadLink = url;
   }
-
+  scrollToSection(){
+    this.qrSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  }
   private vCardCreator(item: any) {
     console.log(item)
     this.fileName = item.name + '.vcf'
@@ -111,6 +114,11 @@ export class HomeComponent implements OnInit {
     const phone = this.customerDetail.telephone;
     const message = `Buen%20día,%20${this.customerDetail.name}%20estoy%20interesado%20en...`;
     const urlFin = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`;
+    window.location.href = urlFin;
+  }
+  sendWhatsAppBcard() {
+    const phone = this.customerDetail.telephone;
+    const urlFin = `https://api.whatsapp.com/send?phone=${phone}&text=${this.customerUrl}`;
     window.location.href = urlFin;
   }
 

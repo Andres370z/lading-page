@@ -16,6 +16,7 @@ body {
     align-items: center;
     justify-content: center;
     justify-items: center;
+    
 }
 
 .image {
@@ -66,15 +67,19 @@ h1 {
     max-width: 300px;
     margin: 15px;
     background: #fff;
-    border: 1px solid #f58221;
+    border: 5px solid #f58221;
     text-align: center;
     cursor: pointer;
-    border-radius: 40px 0 40px 0;
-    /* Primer borde - Gradiente */
-    border-image: linear-gradient(to right, #ffcc00, #ff6633);
-    /* Segundo borde - Color sólido */
-    box-shadow: 0 0 0 5px #f58221;
+    border-radius: 0 50px 0 50px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombra alrededor del borde */
+    height: 460px;
+    width: 290px;
 }
+
+
+
+
+
 
 .blog-wrapper .blog-card:hover {
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
@@ -87,14 +92,16 @@ h1 {
 .blog-wrapper .blog-card .card-img {
     position: relative;
     text-align: center;
-    background: #feefd6;
+    /* background: #feefd6; */
     border-radius: 40px 0 0;
+
 }
 
 .blog-wrapper .blog-card .card-img img {
     transition: 0.3s;
-    max-height: 180px;
-    width: 100%;
+    max-height: 120px;
+    height: 60px;
+    width: 80%;
     border-bottom: 4px solid #f58221;
     border-radius: 8px;
 }
@@ -123,14 +130,21 @@ h1 {
 }
 
 .blog-wrapper .blog-card .card-details {
-    margin-top: 30px;
+    margin-top: 10px;
     font-family: 'Poppins', sans-serif;
     color: #3c3c3c;
     font-size: 20px;
 }
+.blog-wrapper .blog-card .card-detailsTwo {
+    margin-top: 5px;
+    font-family: 'Poppins', sans-serif;
+    color: #f58221;
+    font-size: 18px;
+
+}
 
 .blog-wrapper .blog-card .card-details span {
-    padding: 0 30px;
+    padding: 0 3px;
 }
 
 .blog-wrapper .blog-card .card-details span i {
@@ -138,7 +152,7 @@ h1 {
 }
 
 .blog-wrapper .blog-card .card-text {
-    padding: 30px 15px;
+    padding: 10px 15px;
     font-family: 'Roboto', sans-serif;
     line-height: 22px;
 }
@@ -151,12 +165,32 @@ h1 {
     text-transform: uppercase;
     background: #f58221;
     color: #fff;
-    padding: 15px;
-    margin-bottom: 30px;
+    padding: 7px;
+    /* margin-bottom: 30px; */
     font-family: 'Oswald', sans-serif;
-    border-radius: 8px;
+    border-radius: 25px;
+    font-size: 13px;
 }
-
+.blog-wrapper .blog-card .read-more i {
+    margin-right: 5px;
+    background-color: #fff; /* Fondo blanco para el icono */
+    color: #f58221; /* Color del icono */
+    border-radius: 50%; /* Hace que el fondo sea circular */
+    padding: 5px; /* Espacio interno para el icono */
+    width: 30px; /* Ancho fijo del icono */
+    height: 30px; /* Altura fija del icono */
+    display: inline-flex; /* Para centrar el icono */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+}
+.qr-code {
+    display: inline-block;
+    padding: 5px; /* Ajusta según el espacio deseado alrededor del QR */
+    border: 3px solid #f58221; /* Color del borde */
+    border-radius: 10px; /* Ajusta según el estilo deseado */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra alrededor del borde */
+    background-color: #fff; /* Fondo blanco para resaltar el QR */
+}
 .blog-wrapper .blog-card .read-more:hover {
     background: darken(#feefd6, 20%);
 }

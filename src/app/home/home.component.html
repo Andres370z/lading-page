@@ -20,7 +20,7 @@
                 data-id="7a9e4a8" data-element_type="column">
                 <!-- <div class="elementor-widget-wrap elementor-element-populated">
                   <div class="elementor-element elementor-element-650a93d  elementor-widget elementor-widget-image">
-                    <div class="elementor-widget-container">
+                    <div class="elementor-widget-containerelementor-widget-container">
                       <img decoding="async" src="./../assets/images/LOGO-ATLANTIC-3-removebg-preview.png" title=""
                         alt="" loading="lazy" />
                     </div>
@@ -183,7 +183,8 @@
                     data-widget_type="button.default"
                     class="elementor-element elementor-element-b4e8573 elementor-align-center elementor-mobile-align-center jltma-glass-effect-no elementor-widget elementor-widget-button">
                     <div _ngcontent-dds-c3="" class="elementor-widget-container">
-                      <div _ngcontent-dds-c3="" class="elementor-button-wrapper"><a _ngcontent-dds-c3="" (click)="dowloadImg()"
+                      <div _ngcontent-dds-c3="" class="elementor-button-wrapper">
+                        <a _ngcontent-dds-c3="" (click)="scrollToSection()"
                           class="elementor-button elementor-button-link elementor-size-md elementor-animation-float"><span
                             _ngcontent-dds-c3="" class="elementor-button-content-wrapper"><span _ngcontent-dds-c3=""
                               class="elementor-button-icon elementor-align-icon-left"><i _ngcontent-dds-c3=""
@@ -235,6 +236,33 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <!-- Compartir card por WhatsApp -->
+              <div _ngcontent-dds-c3="" data-id="44cab60" data-element_type="column"
+              class="has_ma_el_bg_slider elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-44cab60 jltma-glass-effect-no">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                          <div class="elementor-element elementor-element-4667de3 elementor-align-center elementor-mobile-align-center jltma-glass-effect-no elementor-widget elementor-widget-button" data-id="4667de3" data-element_type="widget" data-widget_type="button.default">
+                  <div class="elementor-widget-container">
+                    <div class="elementor-button-wrapper">
+                <a class="elementor-button elementor-button-link elementor-size-md elementor-animation-float" (click)="sendWhatsAppBcard()">
+                      <span class="elementor-button-content-wrapper">
+                      <span class="elementor-button-icon elementor-align-icon-left">
+                  <i aria-hidden="true" class="fas fa-share-alt myIcons"></i>			</span>
+                      <span class="elementor-button-text"></span>
+              </span>
+                    </a>
+              </div>
+                  </div>
+                  </div>
+                  <div class="elementor-element elementor-element-d6eca76 jltma-glass-effect-no elementor-widget elementor-widget-heading" data-id="d6eca76" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">Enviar Card</h2></div>
+                  </div>
+                  <div class="elementor-element elementor-element-470eb1a jltma-glass-effect-no elementor-widget elementor-widget-heading" data-id="470eb1a" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">por WhatsApp</h2></div>
+                  </div>
+                    </div>
               </div>
 
             </div>
@@ -407,9 +435,9 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> 
   <!-- TARJETA QR NO BORRAR-->
-  <section
+  <section id="qr-section" #qrSection
     class="has_ma_el_bg_slider elementor-section elementor-top-section elementor-element elementor-element-59b0026 elementor-section-stretched elementor-section-content-middle elementor-section-full_width elementor-section-height-default elementor-section-height-default jltma-glass-effect-no "
     data-id="59b0026" data-element_type="section" 
     data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;}" >
@@ -417,7 +445,7 @@
     <div class="elementor-container elementor-column-gap-no">
       <div
         class="has_ma_el_bg_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7f9e1ec jltma-glass-effect-no"
-        data-id="7f9e1ec" data-element_type="column">
+        data-id="7f9e1ec" data-element_type="column" >
         <div class="elementor-widget-wrap elementor-element-populated">
           
           <div
@@ -425,17 +453,18 @@
             data-id="d677072" data-element_type="widget" data-widget_type="button.default">
             <div class="elementor-widget-container">
               
-              <div class="blog-wrapper">
-                <div class="blog-card noneElement" id="myImage" #screen >
+              <div  class="blog-wrapper" >
+                <div class="blog-card " id="myImage" #screen >
                   <div class="card-img"><img src="./../assets/images/LOGO-ATLANTIC-3-removebg-preview.png"></div>
-                  <div class="card-details"><span><i class="fa-regular fa-user"></i>{{customerDetail.name}} {{customerDetail.lastName}}</span></div>
+                  <div class="card-details"><span><i class="fa-regular fa-user"></i>{{customerDetail.name}}</span></div>
+                  <div class="card-detailsTwo"><span>{{customerDetail.lastName}}</span></div>
                   <div class="card-text">
-                    <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-                    <a (click)="dowloadImg()">Share</a>
+                    <qrcode class="qr-code" (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="190" [errorCorrectionLevel]="'M'"></qrcode>
+                    <!-- <a (click)="dowloadImg()">Share</a> -->
                   </div>
                   <img #canvas style="display: none;">
                   <a #downloadLink></a>
-                  <div class="read-more">Escanear Codigo QR</div>
+                  <div class="read-more"><i class="fa-solid fa-qrcode"></i>Escanear Codigo QR</div>
                 </div>
               </div>
               
@@ -445,6 +474,8 @@
         </div>
       </div>
     </div>
+
+    
   </section>
 
   <section
